@@ -28,11 +28,37 @@ const { Queue, LinkedList, BinarySearchTree } = require('./DataStructures.js');
 // search(value) ---> Devuelve la posicion del nodo con el valor recibido por parametro, contando desde 0.
 // myLinkedList.search(16) ---> devuelve 2.
 
-LinkedList.prototype.getHead = function () {};
+LinkedList.prototype.getHead = function () {
+    return this.head.value;
+};
 
-LinkedList.prototype.getTail = function () {};
+LinkedList.prototype.getTail = function () {
+    let counter = this.head;
+    if (!this.head) {
+        return counter;
+    }
+    while(counter.next){
+        counter = counter.next;        
+    }
+    return counter.value;
+};
 
-LinkedList.prototype.search = function (value) {};
+LinkedList.prototype.search = function (value) {
+    let counter = this.head;
+    let i = 0;
+    if(!this.head){
+        return i;
+    }
+    while(counter){
+        if (counter.value == value) {
+            return i;
+        }else{
+            counter = counter.next;
+            i++;
+        }
+    }
+    return null;
+};
 
 /*****************************************************************/
 /*************************** Recursion ***************************/
@@ -45,7 +71,29 @@ LinkedList.prototype.search = function (value) {};
 // Palindromo es una expresion que se lee igual de derecha a izquierda o viceversa.
 // Ejemplo de numeros palindromos: 1001, 252, 2001, 2222, 9889.
 
-function isPalindrome(number) {}
+function isPalindrome(number) {
+    if(number/100<1 || number<0){
+        return null;
+    }
+    let num = number.toString();
+    num = num.split('');
+    if(!(num[0]==num[num.length-1])){
+        return false;
+    }else{
+        num.pop();
+        num.shift();
+        if(num.length<3){
+            return true;
+        }else{
+            num = num.join('');
+            num = parseInt(num);
+            if(num==0){
+                return true;
+            }
+            return true && isPalindrome(num);
+        }
+    }
+}
 
 /*****************************************************************/
 /*********************** Recursion y Stack ***********************/
@@ -65,7 +113,17 @@ function isPalindrome(number) {}
 // 2
 // 1
 
-Queue.prototype.reverseStack = function () {};
+Queue.prototype.reverseStack = function () {
+    let reverted = [];
+    let size = this.size();
+    for(let i = 0; i<size;i++){
+        reverted.unshift(this.dequeue());
+    }
+    for(let i = size-1;i>=0;i--){
+        this.enqueue(reverted[i]);
+    }
+    return reverted;
+};
 
 /*****************************************************************/
 /**************************** Closures ***************************/
@@ -80,7 +138,15 @@ Queue.prototype.reverseStack = function () {};
 // Si vuelvo a llamar a growUp(), deberia devolver "Pepe tiene ahora 30 años."
 // Y asi consecutivamente...
 
-function growUp() {}
+function pepe(){
+    let edad = 28;
+    return function(){
+        edad++;
+        return "Pepe riene ahora "+edad+" años";
+    }
+}
+
+let growUp = pepe();
 
 /*****************************************************************/
 /****************************** BST ******************************/
@@ -93,7 +159,19 @@ function growUp() {}
 // Si se nos presenta un arbol como el que se encuentra en el archivo BST.png
 // la funcion deberia retornar [1, 5, 14].
 
-BinarySearchTree.prototype.getLeafs = function () {};
+BinarySearchTree.prototype.getLeafs = function (array = []) {
+    if(!this.left&&!this.right){
+        array.push(this.value);
+        return array;
+    }
+    if(this.left){
+        array = this.left.getLeafs(array);
+    }
+    if (this.right) {
+        array = this.right.getLeafs(array);
+    }
+    return array;
+};
 
 /*****************************************************************/
 /***************************** QUEUE *****************************/
@@ -106,7 +184,15 @@ BinarySearchTree.prototype.getLeafs = function () {};
 // Por ejemplo: [1, 2, 3, 4, 5, 6] --> [];
 // HINT: usar el metodo .isEmpty() de la clase Queue ya implementada.
 
-Queue.prototype.clearAll = function () {};
+Queue.prototype.clearAll = function () {
+    while(!this.isEmpty()){
+        this.dequeue();
+    }
+/*     s = this.size();
+    for (let index = 0; index < s; index++) {
+        this.dequeue();        
+    } */
+};
 
 /*****************************************************************/
 /***************************** SORT ******************************/
@@ -186,7 +272,26 @@ Queue.prototype.clearAll = function () {};
 //     },
 // ];
 
-function sortByDni(obj) {}
+function sortByDni(obj) {
+    let sorted = [];
+    let auxReplace;
+    let aux;
+    obj.forEach((element) => {
+        sorted.push(element);
+    });
+    for(let i = 0;i<sorted.length-1;i++){
+        aux=i;
+        for(let j = i+1;j<sorted.length;j++){
+            if(sorted[aux].dni<sorted[j].dni){
+                aux=j;
+            }
+        }
+        auxReplace = sorted[i];
+        sorted[i] = sorted[aux];
+        sorted[aux] = auxReplace;
+    }
+    return sorted;
+}
 
 /*****************************************************************/
 /**************************** DESAFIO ****************************/

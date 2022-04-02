@@ -11,7 +11,7 @@ const {
 } = require('../Repaso.js');
 
 describe('Tests Repaso!!', function () {
-    xdescribe('Linked Lists', function () {
+    describe('Linked Lists', function () {
         describe('EJERCICIO A', function () {
             let linkedList;
             beforeEach(() => {
@@ -36,7 +36,7 @@ describe('Tests Repaso!!', function () {
         });
     });
 
-    xdescribe('Recursion', function () {
+    describe('Recursion', function () {
         describe('EJERCICIO B', function () {
             it('deberia devolver true si el numero es palidromo', () => {
                 expect(isPalindrome(555)).to.equal(true);
@@ -59,7 +59,7 @@ describe('Tests Repaso!!', function () {
         });
     });
 
-    xdescribe('Recursion y Stack', function () {
+    describe('Recursion y Stack', function () {
         describe('EJERCICIO C', function () {
             let queue;
 
@@ -89,7 +89,7 @@ describe('Tests Repaso!!', function () {
         });
     });
 
-    xdescribe('Closures', function () {
+    describe('Closures', function () {
         describe('EJERCICIO D', function () {
             it('growUp deberia devolver el String correspondiente', () => {
                 expect(growUp()).to.equal('Pepe riene ahora 29 años');
@@ -101,7 +101,7 @@ describe('Tests Repaso!!', function () {
         });
     });
 
-    xdescribe('Binary Search Tree', function () {
+    describe('Binary Search Tree', function () {
         describe('EJERCICIO E', () => {
             let bst;
             beforeEach(() => {
@@ -120,7 +120,7 @@ describe('Tests Repaso!!', function () {
             });
         });
     });
-    xdescribe('Queue', function () {
+    describe('Queue', function () {
         describe('EJERCICIO F', () => {
             let queue;
             beforeEach(() => {
@@ -141,12 +141,12 @@ describe('Tests Repaso!!', function () {
                 queue.enqueue(11);
                 queue.enqueue(12);
                 queue.clearAll();
-                expect(queue.size).to.equal(0);
+                expect(queue.size()).to.equal(0);
             });
         });
     });
 
-    xdescribe('Sort', function () {
+    describe('Sort', function () {
         describe('EJERCICIO G', function () {
             const objetoPersonas = [
                 {
@@ -184,15 +184,15 @@ describe('Tests Repaso!!', function () {
             ];
             it('deberia ordenar el array de objetos segun DNI', () => {
                 const sortObj = sortByDni(objetoPersonas);
-                expect(sortObj[0].dni).to.be(90919293);
-                expect(sortObj[1].dni).to.be(76757473);
-                expect(sortObj[2].dni).to.be(40607080);
-                expect(sortObj[3].dni).to.be(23242526);
+                expect(sortObj[0].dni).to.equal(90919293);
+                expect(sortObj[1].dni).to.equal(76757473);
+                expect(sortObj[2].dni).to.equal(40607080);
+                expect(sortObj[3].dni).to.equal(23242526);
             });
         });
     });
 
-    xdescribe('Desafio', function () {
+    describe('Desafio', function () {
         describe('Ejercicio H', function () {
             it('deberia convertir de decimal a hexadecimal', () => {
                 let converted = decToHex(156555);

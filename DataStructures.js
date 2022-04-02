@@ -15,7 +15,7 @@ Queue.prototype.size = function () {
 };
 
 Queue.prototype.isEmpty = function () {
-    return this.size === 0;
+    return this.size() === 0;
 };
 
 function LinkedList() {
